@@ -2,90 +2,104 @@
 import os
 import struct
 import numpy as np
+import traceback
+import gc
 
 
-def Read_HOG_files(users, hog_data_dir):
+def Read_HOG_files(users, hog_data_dir, downsample_rate=10, use_float16=True, max_memory_mb=200):
     """
-    读取HOG特征文件，复刻MATLAB版Read_HOG_files逻辑
-    【修复后】返回字典格式：{文件名: HOG特征矩阵}
+    极致内存优化版HOG读取
     Parameters:
-        users: list[str] - 待读取的文件名列表
-        hog_data_dir: str - HOG文件所在目录
+        users: list[str] - 文件名列表
+        hog_data_dir: str - 文件目录
+        downsample_rate: int - 下采样率（每隔10帧取1帧）
+        use_float16: bool - 使用float16
+        max_memory_mb: int - 单文件最大内存限制（超过则进一步降采样）
     Returns:
-        hog_dict: dict - {文件名: HOG特征矩阵（维度：帧数×4464）}
+        hog_dict: dict - {文件名: HOG特征矩阵}
     """
-    hog_dict = {}  # 改为字典返回，key是文件名，value是HOG特征
+    hog_dict = {}
+    expected_dim = 4464
+    dtype = np.float16 if use_float16 else np.float32
+    bytes_per_elem = 2 if use_float16 else 4
 
     for user in users:
         hog_file_path = os.path.join(hog_data_dir, user)
         if not os.path.exists(hog_file_path):
-            print(f"警告：HOG文件 {hog_file_path} 不存在，跳过")
+            print(f"⚠️  文件不存在：{user}")
             hog_dict[user] = np.array([])
             continue
 
         try:
             with open(hog_file_path, 'rb') as f:
-                # 1. 读取文件头（num_cols/num_rows/num_chan）
+                # 读取文件头
                 header_bytes = f.read(12)
                 if len(header_bytes) != 12:
-                    print(f"警告：{user} 文件头不完整，跳过")
+                    print(f"⚠️  文件头损坏：{user}")
                     hog_dict[user] = np.array([])
                     continue
 
-                num_cols = struct.unpack('<i', header_bytes[0:4])[0]
-                num_rows = struct.unpack('<i', header_bytes[4:8])[0]
-                num_chan = struct.unpack('<i', header_bytes[8:12])[0]
-
-                # 计算特征维度（DAIC-WOZ的HOG应为4464 = 112*112*3/8，需校验）
-                feat_dim = num_rows * num_cols * num_chan
-                expected_dim = 4464
-                if feat_dim != expected_dim:
-                    print(f"警告：{user} 特征维度异常（实际{feat_dim}≠预期{expected_dim}），强制修正")
-                    feat_dim = expected_dim
-
-                # 2. 逐样本读取（小批次，避免字节不匹配）
+                # 逐帧读取+极致下采样
                 hog_data = []
-                single_feat_bytes = (1 + feat_dim) * 4  # 1个valid_ind + feat_dim个特征，每个float32占4字节
-                batch_size = 100  # 缩小批次到100，降低字节误差
+                single_feat_bytes = (1 + expected_dim) * 4
+                frame_count = 0
+                effective_rate = downsample_rate  # 动态调整下采样率
 
                 while True:
-                    # 读取一个批次的字节
-                    batch_bytes = f.read(single_feat_bytes * batch_size)
-                    if not batch_bytes:
+                    # 单帧读取（彻底避免批次内存占用）
+                    frame_bytes = f.read(single_feat_bytes)
+                    if not frame_bytes:
                         break
 
-                    # 计算实际能解析的样本数
-                    actual_samples = len(batch_bytes) // single_feat_bytes
-                    if actual_samples == 0:
-                        break
+                    frame_count += 1
+                    # 动态下采样：先按基础率，再按内存限制二次采样
+                    if frame_count % effective_rate != 0:
+                        continue
 
-                    # 解析每个样本
-                    for i in range(actual_samples):
-                        start = i * single_feat_bytes
-                        end = start + single_feat_bytes
-                        sample_bytes = batch_bytes[start:end]
+                    # 解析单帧
+                    try:
+                        sample = struct.unpack(f'<{1 + expected_dim}f', frame_bytes)
+                        sample = np.array(sample[1:], dtype=dtype)
+                        hog_data.append(sample)
+                    except struct.error:
+                        continue
 
-                        # 解析单个样本
-                        try:
-                            sample = struct.unpack(f'<{1 + feat_dim}f', sample_bytes)
-                            sample = np.array(sample, dtype=np.float32)
-                            hog_data.append(sample[1:])  # 剔除首列valid_ind，只保留特征
-                        except struct.error:
-                            continue  # 跳过损坏的样本
+                    # 内存超限检查：提前终止，避免堆积
+                    if len(hog_data) * expected_dim * bytes_per_elem > max_memory_mb * 1024 * 1024:
+                        effective_rate *= 2  # 加倍下采样率
+                        print(f"⚠️  {user} 内存超限，下采样率提升至{effective_rate}")
+                        # 清空当前数据，重新读取（用新的采样率）
+                        hog_data = []
+                        frame_count = 0
+                        f.seek(12)  # 回到文件头，重新读取
+                        continue
 
-                # 转换为numpy数组并过滤空行
-                hog_data = np.array(hog_data, dtype=np.float32)
+                # 转换为数组并过滤空行
+                hog_data = np.array(hog_data, dtype=dtype)
                 hog_data = hog_data[~np.all(hog_data == 0, axis=1)]
 
-                # 确保维度正确（帧数×4464）
+                # 强制维度对齐
                 if hog_data.shape[1] != expected_dim:
-                    hog_data = hog_data[:, :expected_dim]  # 截断到4464维
+                    pad_width = ((0, 0), (0, expected_dim - hog_data.shape[1])) if hog_data.shape[
+                                                                                       1] < expected_dim else ((0, 0),
+                                                                                                               (0, 0))
+                    hog_data = np.pad(hog_data, pad_width, mode='constant')[:, :expected_dim]
+
+                # 最终内存检查
+                final_memory_mb = hog_data.nbytes / 1024 / 1024
+                print(f"✅  {user} → 原始帧={frame_count} → 采样后帧={hog_data.shape[0]} → 内存={final_memory_mb:.1f}MB")
 
                 hog_dict[user] = hog_data
-                print(f"成功读取 {user} → 形状：{hog_data.shape}（帧数×特征维度）")
+                gc.collect()  # 强制垃圾回收
 
-        except Exception as e:
-            print(f"读取 {user} 失败：{str(e)}")
+        except MemoryError:
+            print(f"❌  内存不足：{user}")
             hog_dict[user] = np.array([])
+            gc.collect()
+        except Exception as e:
+            print(f"❌  读取失败：{user} - {str(e)}")
+            traceback.print_exc()
+            hog_dict[user] = np.array([])
+            gc.collect()
 
     return hog_dict
