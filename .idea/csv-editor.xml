@@ -178,6 +178,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\data\AVEC2017\350_P\350_TRANSCRIPT.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\AVEC2017\351_P\351_TRANSCRIPT.csv">
           <value>
             <Attribute>
@@ -192,7 +199,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\data\AVEC2017\354_P\354_TRANSCRIPT.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\AVEC2017\355_P\355_TRANSCRIPT.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\AVEC2017\356_P\356_TRANSCRIPT.csv">
           <value>
             <Attribute>
               <option name="separator" value="&#9;" />
@@ -290,6 +311,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\data\AVEC2017\393_P\393_TRANSCRIPT.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\AVEC2017\399_P\399_TRANSCRIPT.csv">
           <value>
             <Attribute>
@@ -298,6 +326,13 @@
           </value>
         </entry>
         <entry key="\data\AVEC2017\401_P\401_TRANSCRIPT.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\AVEC2017\403_P\403_TRANSCRIPT.csv">
           <value>
             <Attribute>
               <option name="separator" value="&#9;" />
@@ -325,7 +360,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\data\AVEC2017\414_P\414_TRANSCRIPT.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\AVEC2017\415_P\415_TRANSCRIPT.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\AVEC2017\416_P\416_TRANSCRIPT.csv">
           <value>
             <Attribute>
               <option name="separator" value="&#9;" />
@@ -340,6 +389,13 @@
           </value>
         </entry>
         <entry key="\data\AVEC2017\424_P\424_TRANSCRIPT.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\AVEC2017\432_P\432_TRANSCRIPT.csv">
           <value>
             <Attribute>
               <option name="separator" value="&#9;" />
@@ -409,6 +465,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\data\AVEC2017\454_P\454_TRANSCRIPT.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\AVEC2017\455_P\455_TRANSCRIPT.csv">
           <value>
             <Attribute>
@@ -424,6 +487,13 @@
           </value>
         </entry>
         <entry key="\data\AVEC2017\459_P\459_TRANSCRIPT.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\AVEC2017\464_P\464_TRANSCRIPT.csv">
           <value>
             <Attribute>
               <option name="separator" value="&#9;" />
@@ -494,6 +564,13 @@
           </value>
         </entry>
         <entry key="\data\AVEC2017\479_P\479_TRANSCRIPT.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\AVEC2017\482_P\482_TRANSCRIPT.csv">
           <value>
             <Attribute>
               <option name="separator" value="&#9;" />

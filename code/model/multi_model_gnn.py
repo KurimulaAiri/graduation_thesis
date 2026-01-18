@@ -10,7 +10,8 @@ import warnings
 import gc
 import traceback
 
-from code.utils.read_hog_files import Read_HOG_files
+from code.utils import Read_HOG_files
+import code.config as cfg
 
 warnings.filterwarnings("ignore")
 
@@ -276,26 +277,75 @@ def load_split_subjects():
     return train_subjects, dev_subjects, test_subjects
 
 
-# ===================== 5. 模型定义（修改dropout） ======================
-class MultiModalGAT(torch.nn.Module):
-    def __init__(self, input_dim, hidden_dim, num_classes):
+# ===================== 5. 模型定义（修复维度的注意力GAT） ======================
+class AttentionGAT(torch.nn.Module):
+    def __init__(self, input_dim, hog_dim_ref=4464, covarep_dim_ref=63, hidden_dim=128, num_classes=4):
         super().__init__()
-        # 核心修改：GAT层dropout从0.3→0.5
-        self.gat1 = GATConv(input_dim, hidden_dim, heads=2, concat=True, dropout=0.5)
-        self.gat2 = GATConv(hidden_dim * 2, hidden_dim, heads=1, concat=False, dropout=0.5)
+        self.hog_dim_ref = hog_dim_ref  # HOG参考维度
+        self.covarep_dim_ref = covarep_dim_ref  # COVAREP参考维度
+
+        # 1. 模态注意力层（输出2个权重，对应HOG/COVAREP）
+        self.attn_layer = torch.nn.Sequential(
+            torch.nn.Linear(input_dim, 2),  # 输入是总维度，输出2个权重
+            torch.nn.Softmax(dim=1)  # 权重归一化
+        )
+
+        # 2. GAT层（保持正则化强度）
+        self.gat1 = GATConv(input_dim, hidden_dim, heads=2, concat=True, dropout=0.4)
+        self.gat2 = GATConv(hidden_dim * 2, hidden_dim, heads=1, concat=False, dropout=0.4)
+
+        # 3. 分类器
         self.classifier = torch.nn.Sequential(
             torch.nn.Linear(hidden_dim, hidden_dim // 2),
             torch.nn.ReLU(),
-            # 核心修改：分类器dropout从0.5→0.6
-            torch.nn.Dropout(0.6),
+            torch.nn.Dropout(0.5),
             torch.nn.Linear(hidden_dim // 2, num_classes)
         )
 
     def forward(self, x, edge_index, batch):
-        x = self.gat1(x, edge_index)
+        # ===== 核心修复1：动态拆分+维度校验 =====
+        # 步骤1：拆分HOG和COVAREP（按参考维度）
+        hog_feat = x[:, :self.hog_dim_ref]
+        covarep_feat = x[:, self.hog_dim_ref:]
+
+        # 步骤2：打印维度（调试关键）
+        if batch[0] == 0:  # 只打印第一个batch的维度，避免刷屏
+            print(f"\n📏 模型内维度校验：")
+            print(f"   总输入维度：{x.shape[1]}")
+            print(f"   HOG拆分维度：{hog_feat.shape[1]}（参考：{self.hog_dim_ref}）")
+            print(f"   COVAREP拆分维度：{covarep_feat.shape[1]}（参考：{self.covarep_dim_ref}）")
+
+        # 步骤3：强制对齐COVAREP维度（补0/截断）
+        if covarep_feat.shape[1] != self.covarep_dim_ref:
+            if covarep_feat.shape[1] > self.covarep_dim_ref:
+                covarep_feat = covarep_feat[:, :self.covarep_dim_ref]
+                print(f"⚠️  COVAREP维度截断至：{self.covarep_dim_ref}")
+            else:
+                pad = torch.zeros((covarep_feat.shape[0], self.covarep_dim_ref - covarep_feat.shape[1]),
+                                  device=covarep_feat.device)
+                covarep_feat = torch.cat([covarep_feat, pad], dim=1)
+                print(f"⚠️  COVAREP维度补0至：{self.covarep_dim_ref}")
+
+        # ===== 核心修复2：确保注意力权重广播正确 =====
+        # 计算注意力权重 (N, 2)
+        attn_weights = self.attn_layer(x)
+        # 拆分权重：HOG权重 (N,1)，COVAREP权重 (N,1)
+        hog_w = attn_weights[:, 0:1]  # 取第一个权重，维度(N,1)
+        covarep_w = attn_weights[:, 1:2]  # 取第二个权重，维度(N,1)
+
+        # ===== 加权融合（广播乘法+拼接，而非相加！） =====
+        # 关键修复：之前错误地将不同维度的张量相加，正确做法是「加权后拼接」
+        hog_weighted = hog_w * hog_feat  # (N,4464)
+        covarep_weighted = covarep_w * covarep_feat  # (N,63)
+        fused_feat = torch.cat([hog_weighted, covarep_weighted], dim=1)  # (N,4527)
+
+        # ===== GAT层前向 =====
+        x = self.gat1(fused_feat, edge_index)
         x = F.relu(x)
         x = self.gat2(x, edge_index)
         x = F.relu(x)
+
+        # ===== 图池化+分类 =====
         x = global_mean_pool(x, batch)
         out = self.classifier(x)
         return out
@@ -378,15 +428,20 @@ if __name__ == "__main__":
         num_workers=0
     )
 
-    # 初始化模型（传入动态输入维度）
-    model = MultiModalGAT(
-        input_dim=input_dim,
+    # 替换原模型初始化代码：
+    model = AttentionGAT(
+        input_dim=input_dim,  # 从数据集动态获取的总维度
+        hog_dim_ref=config.HOG_DIM_REF,  # 4464（配置中的参考维度）
+        covarep_dim_ref=config.COVAREP_DIM_REF,  # 63（配置中的参考维度）
         hidden_dim=config.HIDDEN_DIM,
         num_classes=config.NUM_CLASSES
     )
     model = model.to(config.DEVICE)
     # 核心修改：weight_decay从1e-5→1e-4
-    optimizer = torch.optim.Adam(model.parameters(), lr=config.LR, weight_decay=1e-4)
+    # 主程序中，替换原optimizer和加入学习率调度器：
+    optimizer = torch.optim.Adam(model.parameters(), lr=8e-4, weight_decay=1e-4)  # lr从5e-4→8e-4
+    # 学习率衰减：每10轮学习率×0.8
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.8)
     criterion = torch.nn.CrossEntropyLoss()
 
     # 打印信息
@@ -398,14 +453,20 @@ if __name__ == "__main__":
 
     # 训练模型
     best_dev_acc = 0.0
-    best_model_path = "best_multi_modal_gat.pth"
+    best_model_path = cfg.RESULTS_DIR + "attention_gat.pth"
 
     for epoch in range(1, config.EPOCHS + 1):
         train_loss = train_epoch(model, train_loader, optimizer, criterion, config.DEVICE)
         dev_acc = evaluate(model, dev_loader, config.DEVICE)
 
+        # 学习率衰减
+        scheduler.step()
+
         if dev_acc > best_dev_acc:
             best_dev_acc = dev_acc
+
+            print("保存路径：", best_model_path)
+
             torch.save(model.state_dict(), best_model_path)
             print(f"Epoch {epoch:02d} | 损失：{train_loss:.4f} | 验证集准确率：{dev_acc:.4f} → 保存模型")
         else:
