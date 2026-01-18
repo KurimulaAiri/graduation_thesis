@@ -276,22 +276,22 @@ def load_split_subjects():
     return train_subjects, dev_subjects, test_subjects
 
 
-# ===================== 5. 模型定义（动态输入维度） ======================
+# ===================== 5. 模型定义（修改dropout） ======================
 class MultiModalGAT(torch.nn.Module):
     def __init__(self, input_dim, hidden_dim, num_classes):
         super().__init__()
-        # 输入维度动态传入，不再硬编码
-        self.gat1 = GATConv(input_dim, hidden_dim, heads=2, concat=True, dropout=0.3)
-        self.gat2 = GATConv(hidden_dim * 2, hidden_dim, heads=1, concat=False, dropout=0.3)
+        # 核心修改：GAT层dropout从0.3→0.5
+        self.gat1 = GATConv(input_dim, hidden_dim, heads=2, concat=True, dropout=0.5)
+        self.gat2 = GATConv(hidden_dim * 2, hidden_dim, heads=1, concat=False, dropout=0.5)
         self.classifier = torch.nn.Sequential(
             torch.nn.Linear(hidden_dim, hidden_dim // 2),
             torch.nn.ReLU(),
-            torch.nn.Dropout(0.5),
+            # 核心修改：分类器dropout从0.5→0.6
+            torch.nn.Dropout(0.6),
             torch.nn.Linear(hidden_dim // 2, num_classes)
         )
 
     def forward(self, x, edge_index, batch):
-        # 前向传播逻辑不变
         x = self.gat1(x, edge_index)
         x = F.relu(x)
         x = self.gat2(x, edge_index)
@@ -385,7 +385,8 @@ if __name__ == "__main__":
         num_classes=config.NUM_CLASSES
     )
     model = model.to(config.DEVICE)
-    optimizer = torch.optim.Adam(model.parameters(), lr=config.LR, weight_decay=1e-5)
+    # 核心修改：weight_decay从1e-5→1e-4
+    optimizer = torch.optim.Adam(model.parameters(), lr=config.LR, weight_decay=1e-4)
     criterion = torch.nn.CrossEntropyLoss()
 
     # 打印信息
