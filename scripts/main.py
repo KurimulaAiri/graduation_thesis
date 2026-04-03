@@ -87,13 +87,22 @@ def main():
         ).to(device)
         print("集成模型初始化完成")
         
-        # 定义优化器和损失函数
-        optimizer = torch.optim.Adam(
-            model.parameters(), 
-            lr=TRAIN_CONFIG['learning_rate'], 
-            weight_decay=TRAIN_CONFIG['weight_decay']
-        )
-        criterion = torch.nn.CrossEntropyLoss()
+        # 计算类别权重，解决样本不均衡问题
+    label_counts = pd.Series(labels).value_counts().sort_index()
+    total_samples = len(labels)
+    class_weights = torch.tensor(
+        [total_samples / (len(label_counts) * label_counts.get(i, 1)) for i in range(MODEL_CONFIG['num_classes'])],
+        dtype=torch.float
+    ).to(device)
+    print(f"类别权重: {class_weights.cpu().numpy()}")
+    
+    # 定义优化器和损失函数
+    optimizer = torch.optim.Adam(
+        model.parameters(), 
+        lr=TRAIN_CONFIG['learning_rate'], 
+        weight_decay=TRAIN_CONFIG['weight_decay']
+    )
+    criterion = torch.nn.CrossEntropyLoss(weight=class_weights)
         # 添加学习率调度器
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', patience=5, factor=0.5)
         print("优化器和损失函数设置完成")
