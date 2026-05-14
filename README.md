@@ -41,6 +41,13 @@ gt2/
 ├── data/                 # 数据目录（被.gitignore排除）
 │   └── AVEC2017/        # AVEC2017数据集
 ├── results/             # 结果输出目录（被.gitignore排除）
+├── architecture.drawio      # 系统架构图源文件（Draw.io格式）
+├── architecture.drawio.png  # 系统架构图（PNG格式）
+├── architecture.svg         # 系统架构图（SVG矢量格式）
+├── thesis.md                # 论文（Markdown格式）
+├── thesis.pdf               # 论文（PDF格式）
+├── thesis.docx              # 论文（Word格式）
+├── thesis_t.docx            # 论文（Word模板格式）
 ├── .gitignore          # Git忽略文件配置
 ├── requirements.txt    # Python依赖包
 └── README.md          # 项目说明文档
@@ -102,6 +109,26 @@ gt2/
 - 实现完整的训练和评估流程
 - 5折交叉验证
 - 生成所有可视化图表和评价报告
+
+### 系统架构图
+
+**architecture.drawio / architecture.drawio.png / architecture.svg**
+- 系统整体架构图，展示数据流、模型结构和处理流程
+- 提供Draw.io源文件（可编辑）、PNG位图和SVG矢量图三种格式
+- 便于在不同场景下使用和修改架构图
+
+### 论文文档
+
+**thesis.md**
+- Markdown格式的论文全文，包含摘要、引言、方法、实验、结论等完整章节
+- 方便在各类平台查看和编辑
+
+**thesis.pdf**
+- PDF格式的论文，适合打印和正式提交
+
+**thesis.docx / thesis_t.docx**
+- Word格式的论文文档，便于在Microsoft Word中编辑排版
+- `thesis_t.docx` 为论文模板版本
 
 ## 使用方法
 
@@ -541,6 +568,11 @@ TRAIN_CONFIG = {
 - **返回值**：集成预测结果和概率
 
 ## 更新日志
+
+### v1.1.0 (2026-04)
+- 添加系统架构图（Draw.io/PNG/SVG格式）
+- 添加论文文档（Markdown/PDF/Word格式）
+- 更新README文档，增加论文和架构图相关说明
 
 ### v1.0.0 (2026-04-03)
 - 项目初始化

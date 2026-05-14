@@ -1,0 +1,163 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.4 Chrome/138.0.7204.97 Electron/37.2.1 Safari/537.36" version="28.0.4">
+  <diagram name="架构图" id="architecture-diagram">
+    <mxGraphModel dx="1213" dy="804" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="data-layer-main" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=2;fillColor=#ffffff;fontFamily=宋体;" parent="1" vertex="1">
+          <mxGeometry x="50" y="30" width="1100" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="data-layer-title" value="数据层" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=宋体;fontSize=20;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="550" y="35" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="data-1" value="&lt;font face=&quot;Times New Roman&quot;&gt;AVEC2017&lt;/font&gt; 数据集&lt;br&gt;训练/验证/测试集" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#e8e8e8;fontFamily=宋体;fontSize=18;" parent="1" vertex="1">
+          <mxGeometry x="80" y="65" width="180" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="data-2" value="面部表情特征&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;17&lt;/font&gt;个动作单元" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#e8e8e8;fontFamily=宋体;fontSize=18;" parent="1" vertex="1">
+          <mxGeometry x="290" y="65" width="180" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="data-3" value="多模态特征&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;HOG/COVAREP&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#e8e8e8;fontFamily=宋体;fontSize=18;" parent="1" vertex="1">
+          <mxGeometry x="500" y="65" width="180" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="data-4" value="抑郁等级标签&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;BDI-II&amp;nbsp;&lt;/font&gt;评分 (&lt;font face=&quot;Times New Roman&quot;&gt;0-4&lt;/font&gt;级)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#e8e8e8;fontFamily=宋体;fontSize=18;" parent="1" vertex="1">
+          <mxGeometry x="710" y="65" width="180" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="data-5" value="配置文件&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;config.py&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Times New Roman&quot;&gt;data_config.py&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#e8e8e8;fontFamily=宋体;fontSize=18;" parent="1" vertex="1">
+          <mxGeometry x="920" y="65" width="200" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-1" value="" style="endArrow=classic;html=1;strokeColor=#333333;strokeWidth=2;fontFamily=宋体;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" edge="1" target="process-layer-main" source="data-layer-main">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="150" as="sourcePoint" />
+            <mxPoint x="600" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="process-layer-main" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=2;fillColor=#ffffff;fontFamily=宋体;" parent="1" vertex="1">
+          <mxGeometry x="50" y="190" width="1100" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="process-layer-title" value="数据处理层" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=宋体;fontSize=20;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="530" y="195" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="process-1" value="数据加载&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;process_all_subjects()&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#d0d0d0;fontFamily=宋体;fontSize=18;" parent="1" vertex="1">
+          <mxGeometry x="80" y="235" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="process-2" value="特征提取&lt;br&gt;滑动窗口/标准化" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#d0d0d0;fontFamily=宋体;fontSize=18;" parent="1" vertex="1">
+          <mxGeometry x="290" y="235" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="process-3" value="数据增强&lt;br&gt;噪声添加/样本扩充" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#d0d0d0;fontFamily=宋体;fontSize=18;" parent="1" vertex="1">
+          <mxGeometry x="500" y="235" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="process-4" value="图结构构建&lt;br&gt;节点/边/权重" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#d0d0d0;fontFamily=宋体;fontSize=18;" parent="1" vertex="1">
+          <mxGeometry x="710" y="235" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="process-5" value="数据集创建&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;PyTorch Geometric Data&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#d0d0d0;fontFamily=宋体;fontSize=18;" parent="1" vertex="1">
+          <mxGeometry x="920" y="235" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-2" value="" style="endArrow=classic;html=1;strokeColor=#333333;strokeWidth=2;fontFamily=宋体;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" edge="1" target="model-layer-main" source="process-layer-main">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="310" as="sourcePoint" />
+            <mxPoint x="600" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="model-layer-main" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=2;fillColor=#ffffff;fontFamily=宋体;" parent="1" vertex="1">
+          <mxGeometry x="50" y="350" width="1100" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="model-layer-title" value="模型层" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=宋体;fontSize=20;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="560" y="355" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="model-1" value="&lt;font face=&quot;Times New Roman&quot;&gt;GCN&lt;/font&gt; 模型&lt;br&gt;图卷积网络&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;font face=&quot;Times New Roman&quot;&gt;2&lt;/font&gt; 层&lt;font face=&quot;Times New Roman&quot;&gt;&amp;nbsp;GCNConv&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;font face=&quot;Times New Roman&quot;&gt;BatchNorm + Dropout&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#c8c8c8;fontFamily=宋体;fontSize=17;align=center;" parent="1" vertex="1">
+          <mxGeometry x="80" y="395" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="model-4" value="集成模型&lt;br&gt;融合三种&lt;font face=&quot;Times New Roman&quot;&gt;&amp;nbsp;GNN&amp;nbsp;&lt;/font&gt;架构&lt;br&gt;平均多个模型输出概率&lt;br&gt;提高预测稳定性和准确性" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=2;fillColor=#b8b8b8;fontFamily=宋体;fontSize=17;align=center;" parent="1" vertex="1">
+          <mxGeometry x="770" y="395" width="350" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="dash-arrow-1" value="" style="endArrow=classic;html=1;strokeColor=#333333;strokeWidth=1.5;dashed=1;dashPattern=5 5;fontFamily=宋体;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="440" as="sourcePoint" />
+            <mxPoint x="770" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dash-arrow-2" value="" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.5;dashed=1;dashPattern=5 5;fontFamily=宋体;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="510" y="440" as="sourcePoint" />
+            <mxPoint x="770" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dash-arrow-3" value="" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.5;dashed=1;dashPattern=5 5;fontFamily=宋体;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="740" y="440" as="sourcePoint" />
+            <mxPoint x="770" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-3" value="" style="endArrow=classic;html=1;strokeColor=#333333;strokeWidth=2;fontFamily=宋体;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" edge="1" target="train-layer-main">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="500" as="sourcePoint" />
+            <mxPoint x="600" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="train-layer-main" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=2;fillColor=#ffffff;fontFamily=宋体;" parent="1" vertex="1">
+          <mxGeometry x="50" y="540" width="1100" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="train-layer-title" value="训练与评估层" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=宋体;fontSize=20;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="520" y="545" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="train-1" value="模型训练&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;Adam&lt;/font&gt;优化器" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#d0d0d0;fontFamily=宋体;fontSize=20;" parent="1" vertex="1">
+          <mxGeometry x="80" y="585" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="train-2" value="&lt;font face=&quot;Times New Roman&quot;&gt;5&amp;nbsp;&lt;/font&gt;折交叉验证&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;KFold (k=5)&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#d0d0d0;fontFamily=宋体;fontSize=20;" parent="1" vertex="1">
+          <mxGeometry x="290" y="585" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="train-3" value="早停机制&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;patience=10&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#d0d0d0;fontFamily=宋体;fontSize=20;" parent="1" vertex="1">
+          <mxGeometry x="500" y="585" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="train-4" value="模型评估&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;Acc/Prec/Recall/F1&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#d0d0d0;fontFamily=宋体;fontSize=20;" parent="1" vertex="1">
+          <mxGeometry x="710" y="585" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="train-5" value="基准对比&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;LR/RF/SVM&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#d0d0d0;fontFamily=宋体;fontSize=20;" parent="1" vertex="1">
+          <mxGeometry x="920" y="585" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow-4" value="" style="endArrow=classic;html=1;strokeColor=#333333;strokeWidth=2;fontFamily=宋体;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" edge="1" target="output-layer-main">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="660" as="sourcePoint" />
+            <mxPoint x="600" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="output-layer-main" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=2;fillColor=#ffffff;fontFamily=宋体;" parent="1" vertex="1">
+          <mxGeometry x="50" y="700" width="1100" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="output-layer-title" value="可视化与输出层" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=宋体;fontSize=20;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="705" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="output-1" value="混淆矩阵&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;confusion_matrix.png&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#e0e0e0;fontFamily=宋体;fontSize=17;" parent="1" vertex="1">
+          <mxGeometry x="80" y="745" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="output-2" value="ROC曲线&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;roc_curve.png&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#e0e0e0;fontFamily=宋体;fontSize=17;" parent="1" vertex="1">
+          <mxGeometry x="260" y="745" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="output-3" value="交叉验证精度&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;cv_accuracy.png&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#e0e0e0;fontFamily=宋体;fontSize=17;" parent="1" vertex="1">
+          <mxGeometry x="410" y="745" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="output-4" value="模型对比&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;model_comparison.png&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#e0e0e0;fontFamily=宋体;fontSize=17;" parent="1" vertex="1">
+          <mxGeometry x="560" y="745" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="output-5" value="分类报告&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;classification_report.txt&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#e0e0e0;fontFamily=宋体;fontSize=17;" parent="1" vertex="1">
+          <mxGeometry x="750" y="745" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="output-6" value="模型保存&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;depression_classifier.pth&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#e0e0e0;fontFamily=宋体;fontSize=17;" parent="1" vertex="1">
+          <mxGeometry x="940" y="745" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="info-box-main" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#ffffff;fontFamily=宋体;" parent="1" vertex="1">
+          <mxGeometry x="50" y="825" width="1100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="info-box-text" value="性能指标：准确率 &lt;font face=&quot;Times New Roman&quot;&gt;96.00%&lt;/font&gt; | 精确率 &lt;font face=&quot;Times New Roman&quot;&gt;97.38%&lt;/font&gt; | 召回率 &lt;font face=&quot;Times New Roman&quot;&gt;96.20%&lt;/font&gt; | F1分数 &lt;font face=&quot;Times New Roman&quot;&gt;96.60%&lt;/font&gt; | AUC值 &lt;font face=&quot;Times New Roman&quot;&gt;0.9918&lt;/font&gt; | 交叉验证 &lt;font face=&quot;Times New Roman&quot;&gt;5&amp;nbsp;&lt;/font&gt;折 | 分类数 &lt;font face=&quot;Times New Roman&quot;&gt;5&amp;nbsp;&lt;/font&gt;级" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=宋体;fontSize=19;" parent="1" vertex="1">
+          <mxGeometry x="50" y="825" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="model-2" value="&lt;font face=&quot;Times New Roman&quot;&gt;GAT&amp;nbsp;&lt;/font&gt;模型&lt;br&gt;图注意力网络&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;2&lt;/font&gt; 层&lt;font face=&quot;Times New Roman&quot;&gt;&amp;nbsp;GATConv (4 heads)&lt;/font&gt;&lt;br&gt;多头注意力机制" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#c8c8c8;fontFamily=宋体;fontSize=17;align=center;" parent="1" vertex="1">
+          <mxGeometry x="310" y="395" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="model-3" value="&lt;font face=&quot;Times New Roman&quot;&gt;GraphSAGE&amp;nbsp;&lt;/font&gt;模型&lt;br&gt;图采样聚合网络&lt;br&gt;&lt;font face=&quot;Times New Roman&quot;&gt;2&lt;/font&gt; 层&lt;font face=&quot;Times New Roman&quot;&gt;&amp;nbsp;SAGEConv&lt;br&gt;Mean Aggregator&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#333333;strokeWidth=1;fillColor=#c8c8c8;fontFamily=宋体;fontSize=17;align=center;" parent="1" vertex="1">
+          <mxGeometry x="540" y="395" width="200" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
