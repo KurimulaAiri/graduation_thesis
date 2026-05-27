@@ -1,0 +1,136 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.4 Chrome/138.0.7204.97 Electron/37.2.1 Safari/537.36" version="28.0.4">
+  <diagram name="第 1 页" id="lW7P_CQy_qnRbZEGpaV1">
+    <mxGraphModel dx="578" dy="383" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="0" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="1" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-72" value="&lt;b&gt;Input Graph Data&lt;/b&gt;&lt;br&gt;Feature Matrix: `X \in \mathbb{R}^{N \times d_{in}}`  |  Adjacency: `\mathcal{E} \in \mathbb{Z}^{2 \times |\mathcal{E}|}`" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=12;fillColor=none;strokeColor=#000000;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="525" y="50" width="400" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-73" value="EnsembleClassifier (ModuleList)" style="swimlane;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=12;fontStyle=1;align=center;verticalAlign=top;fillColor=none;strokeColor=#333333;strokeWidth=1;dashed=1;connectable=0;startSize=25;" vertex="1" parent="1">
+          <mxGeometry x="180" y="150" width="1090" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-74" value="Submodel 1: GCN-based" style="swimlane;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fontStyle=1;align=center;verticalAlign=top;fillColor=none;strokeColor=#666666;dashed=1;startSize=20;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-73">
+          <mxGeometry x="20" y="40" width="330" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-75" value="GCNConv 1 (`d_{in} \to 64`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-74">
+          <mxGeometry x="20" y="35" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-76" value="BatchNorm1d &amp;rarr; ReLU" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-74">
+          <mxGeometry x="20" y="75" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-77" value="Dropout (`p = 0.5`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-74">
+          <mxGeometry x="20" y="115" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-78" value="GCNConv 2 (`64 \to 64`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-74">
+          <mxGeometry x="20" y="155" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-79" value="BatchNorm1d &amp;rarr; ReLU" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-74">
+          <mxGeometry x="20" y="195" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-80" value="Dropout (`p = 0.5`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-74">
+          <mxGeometry x="20" y="235" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-81" value="GlobalMeanPool (Readout) &amp;rarr; `\mathbf{z}_{gcn} \in \mathbb{R}^{64}`" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-74">
+          <mxGeometry x="20" y="275" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-82" value="Linear (`64 \to 64`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-74">
+          <mxGeometry x="20" y="315" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-83" value="Dropout (`p = 0.5`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-74">
+          <mxGeometry x="20" y="355" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-84" value="Linear Output Layer (`64 \to 5`) &amp;rarr; `\text{Logits}_{gcn}`" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fontStyle=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-74">
+          <mxGeometry x="20" y="395" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-85" value="Submodel 2: GAT-based" style="swimlane;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fontStyle=1;align=center;verticalAlign=top;fillColor=none;strokeColor=#666666;dashed=1;startSize=20;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-73">
+          <mxGeometry x="380" y="40" width="330" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-86" value="GATConv 1 (`d_{in} \to 64`, heads=4, concat=False)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-85">
+          <mxGeometry x="20" y="35" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-87" value="BatchNorm1d &amp;rarr; ReLU" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-85">
+          <mxGeometry x="20" y="75" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-88" value="Dropout (`p = 0.5`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-85">
+          <mxGeometry x="20" y="115" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-89" value="GATConv 2 (Attention weight `\alpha_{ij}`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-85">
+          <mxGeometry x="20" y="155" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-90" value="BatchNorm1d &amp;rarr; ReLU" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-85">
+          <mxGeometry x="20" y="195" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-91" value="Dropout (`p = 0.5`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-85">
+          <mxGeometry x="20" y="235" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-92" value="GlobalAttentionPool (Readout) &amp;rarr; `\mathbf{z}_{gat} \in \mathbb{R}^{64}`" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-85">
+          <mxGeometry x="20" y="275" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-93" value="Linear (`64 \to 64`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-85">
+          <mxGeometry x="20" y="315" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-94" value="Dropout (`p = 0.5`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-85">
+          <mxGeometry x="20" y="355" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-95" value="Linear Output Layer (`64 \to 5`) &amp;rarr; `\text{Logits}_{gat}`" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fontStyle=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-85">
+          <mxGeometry x="20" y="395" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-96" value="Submodel 3: GraphSAGE-based" style="swimlane;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fontStyle=1;align=center;verticalAlign=top;fillColor=none;strokeColor=#666666;dashed=1;startSize=20;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-73">
+          <mxGeometry x="740" y="40" width="330" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-97" value="SAGEConv 1 (`d_{in} \to 64`, Aggregator=Mean)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-96">
+          <mxGeometry x="20" y="35" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-98" value="BatchNorm1d &amp;rarr; ReLU" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-96">
+          <mxGeometry x="20" y="75" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-99" value="Dropout (`p = 0.5`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-96">
+          <mxGeometry x="20" y="115" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-100" value="SAGEConv 2 (`\text{mean}(\{\mathbf{h}_u, \forall u \in \mathcal{N}(v)\})`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-96">
+          <mxGeometry x="20" y="155" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-101" value="BatchNorm1d &amp;rarr; ReLU" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-96">
+          <mxGeometry x="20" y="195" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-102" value="Dropout (`p = 0.5`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-96">
+          <mxGeometry x="20" y="235" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-103" value="GlobalMeanPool (Readout) → `\mathbf{z}_{\text{sage}} \in \mathbb{R}^{64}`" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-96">
+          <mxGeometry x="20" y="275" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-104" value="Linear (`64 \to 64`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-96">
+          <mxGeometry x="20" y="315" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-105" value="Dropout (`p = 0.5`)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-96">
+          <mxGeometry x="20" y="355" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-106" value="Linear Output Layer (`64 \to 5`) → `\text{Logits}_{\text{sage}}`" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=11;fontStyle=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="QOxGj5V9nE56EqJBSi2E-96">
+          <mxGeometry x="20" y="395" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-107" value="&lt;b&gt;Soft Voting Mechanism&lt;/b&gt;&lt;br&gt;`\text{Final\_Logits} = \frac{1}{3} \sum (\text{Logits}_{gcn} + \text{Logits}_{gat} + \text{Logits}_{\text{sage}}) \in \mathbb{R}^{5}`" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=12;fillColor=none;strokeColor=#000000;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="475" y="710" width="500" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-108" value="&lt;b&gt;Final System Prediction (PHQ-8 Severity Classification)&lt;/b&gt;&lt;br&gt;Level 0: None (0-4)  |  Level 1: Mild (5-9)  |  Level 2: Moderate (10-14)  |  Level 3: Moderately Severe (15-19)  |  Level 4: Severe (20-24)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=12;fillColor=none;strokeColor=#000000;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="325" y="795" width="800" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-109" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;" edge="1" parent="1" source="QOxGj5V9nE56EqJBSi2E-72" target="QOxGj5V9nE56EqJBSi2E-73">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-110" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;" edge="1" parent="1" source="QOxGj5V9nE56EqJBSi2E-84" target="QOxGj5V9nE56EqJBSi2E-107">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-111" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;" edge="1" parent="1" source="QOxGj5V9nE56EqJBSi2E-95" target="QOxGj5V9nE56EqJBSi2E-107">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-112" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;" edge="1" parent="1" source="QOxGj5V9nE56EqJBSi2E-106" target="QOxGj5V9nE56EqJBSi2E-107">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QOxGj5V9nE56EqJBSi2E-113" style="edgeStyle=straightStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;" edge="1" parent="1" source="QOxGj5V9nE56EqJBSi2E-107" target="QOxGj5V9nE56EqJBSi2E-108">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

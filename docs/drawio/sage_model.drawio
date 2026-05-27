@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<mxGraphModel dx="0" dy="0" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1600" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="page_bg" parent="1" vertex="1" value="" style="shape=rect;fillColor=#FAFBFC;strokeColor=none;rounded=0;">
+      <mxGeometry as="geometry" x="0" y="0" width="1000" height="1600"/>
+    </mxCell>
+    <mxCell id="title" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:18px;color:#FFFFFF;&quot;&gt;GraphSAGE 模型结构图&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;color:#D7BDE2;&quot;&gt;Graph Sample and Aggregate · 图采样聚合网络 · 采样+聚合策略&lt;/font&gt;" style="shape=rect;fillColor=#8E44AD;strokeColor=none;rounded=1;fontSize=13;align=center;verticalAlign=middle;spacingTop=8;spacingLeft=20;shadow=1;">
+      <mxGeometry as="geometry" x="50" y="20" width="900" height="55"/>
+    </mxCell>
+    <mxCell id="input" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:13px;color:#7D6608;&quot;&gt;📥 输入数据&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#555555;&quot;&gt;x ∈ ℝ&lt;sup&gt;N×d_in&lt;/sup&gt; · edge_index ∈ ℤ&lt;sup&gt;2×E&lt;/sup&gt; · batch ∈ ℕ&lt;sup&gt;N&lt;/sup&gt;&lt;/font&gt;" style="shape=rect;fillColor=#FCF3CF;strokeColor=#D4AC0D;strokeWidth=2;rounded=1;fontSize=12;align=center;verticalAlign=middle;spacingTop=6;shadow=1;">
+      <mxGeometry as="geometry" x="150" y="90" width="520" height="45"/>
+    </mxCell>
+    <mxCell id="dc_bg" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:14px;color:#2C3E50;&quot;&gt;DepressionClassifier&lt;/font&gt;&lt;/b&gt;&lt;font style=&quot;font-size:10px;color:#7F8C8D;&quot;&gt; · model_type = 'sage'&lt;/font&gt;" style="shape=rect;fillColor=#F0F3F4;strokeColor=#707B7C;strokeWidth=2;rounded=1;dashed=1;dashPattern=6 4;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;spacingRight=15;spacingBottom=10;shadow=1;">
+      <mxGeometry as="geometry" x="100" y="150" width="580" height="1180"/>
+    </mxCell>
+    <mxCell id="gnn_bg" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:13px;color:#6C3483;&quot;&gt;SAGEModel&lt;/font&gt;&lt;/b&gt;&lt;font style=&quot;font-size:10px;color:#5D6D7E;&quot;&gt; · 图神经网络编码器&lt;/font&gt;" style="shape=rect;fillColor=#FFFFFF;strokeColor=#8E44AD;strokeWidth=2;rounded=1;dashed=1;dashPattern=4 3;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;spacingRight=15;spacingBottom=10;">
+      <mxGeometry as="geometry" x="130" y="195" width="520" height="950"/>
+    </mxCell>
+    <mxCell id="conv1" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:13px;&quot;&gt;SAGEConv · 第一层采样聚合&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#5D6D7E;&quot;&gt;d_in → 64 · Mean Aggregator · 邻居特征拼接+线性变换&lt;/font&gt;" style="shape=rect;fillColor=#ECF0F1;strokeColor=#8E44AD;strokeWidth=2;rounded=1;align=center;verticalAlign=middle;fontSize=12;spacingTop=5;">
+      <mxGeometry as="geometry" x="160" y="240" width="460" height="55"/>
+    </mxCell>
+    <mxCell id="dim1" parent="1" vertex="1" value="&lt;font style=&quot;font-size:9px;color:#8E44AD;&quot;&gt;&lt;b&gt;d_in&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;">
+      <mxGeometry as="geometry" x="625" y="258" width="50" height="20"/>
+    </mxCell>
+    <mxCell id="agg1" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:11px;color:#6C3483;&quot;&gt;🔄 采样聚合过程 (Mean Aggregator)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#7D3C98;&quot;&gt;h_N(v) = mean({h_u, ∀u∈N(v)}) · h_v' = W · [h_v || h_N(v)]&lt;/font&gt;" style="shape=rect;fillColor=#F5EEF8;strokeColor=#AF7AC5;strokeWidth=1.5;rounded=1;align=center;verticalAlign=middle;fontSize=10;spacingTop=3;">
+      <mxGeometry as="geometry" x="190" y="310" width="400" height="45"/>
+    </mxCell>
+    <mxCell id="bn1" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:12px;color:#1A5276;&quot;&gt;BatchNorm1d → ReLU&lt;/font&gt;&lt;/b&gt;" style="shape=rect;fillColor=#D6EAF8;strokeColor=#2E86C1;strokeWidth=2;rounded=1;align=center;verticalAlign=middle;fontSize=12;">
+      <mxGeometry as="geometry" x="160" y="370" width="460" height="40"/>
+    </mxCell>
+    <mxCell id="do1" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:12px;color:#935116;&quot;&gt;Dropout (p=0.5)&lt;/font&gt;&lt;/b&gt;" style="shape=rect;fillColor=#FDEBD0;strokeColor=#D35400;strokeWidth=2;rounded=1;align=center;verticalAlign=middle;fontSize=12;">
+      <mxGeometry as="geometry" x="160" y="425" width="460" height="40"/>
+    </mxCell>
+    <mxCell id="conv2" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:13px;&quot;&gt;SAGEConv · 第二层采样聚合&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#5D6D7E;&quot;&gt;64 → 64 · 深层特征提取 · 邻居特征拼接+线性变换&lt;/font&gt;" style="shape=rect;fillColor=#ECF0F1;strokeColor=#8E44AD;strokeWidth=2;rounded=1;align=center;verticalAlign=middle;fontSize=12;spacingTop=5;">
+      <mxGeometry as="geometry" x="160" y="480" width="460" height="55"/>
+    </mxCell>
+    <mxCell id="dim2" parent="1" vertex="1" value="&lt;font style=&quot;font-size:9px;color:#8E44AD;&quot;&gt;&lt;b&gt;64&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;">
+      <mxGeometry as="geometry" x="625" y="498" width="50" height="20"/>
+    </mxCell>
+    <mxCell id="agg2" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:11px;color:#6C3483;&quot;&gt;🔄 采样聚合过程 (Mean Aggregator)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#7D3C98;&quot;&gt;h_N(v) = mean({h_u, ∀u∈N(v)}) · h_v' = W · [h_v || h_N(v)]&lt;/font&gt;" style="shape=rect;fillColor=#F5EEF8;strokeColor=#AF7AC5;strokeWidth=1.5;rounded=1;align=center;verticalAlign=middle;fontSize=10;spacingTop=3;">
+      <mxGeometry as="geometry" x="190" y="550" width="400" height="45"/>
+    </mxCell>
+    <mxCell id="bn2" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:12px;color:#1A5276;&quot;&gt;BatchNorm1d → ReLU&lt;/font&gt;&lt;/b&gt;" style="shape=rect;fillColor=#D6EAF8;strokeColor=#2E86C1;strokeWidth=2;rounded=1;align=center;verticalAlign=middle;fontSize=12;">
+      <mxGeometry as="geometry" x="160" y="610" width="460" height="40"/>
+    </mxCell>
+    <mxCell id="do2" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:12px;color:#935116;&quot;&gt;Dropout (p=0.5)&lt;/font&gt;&lt;/b&gt;" style="shape=rect;fillColor=#FDEBD0;strokeColor=#D35400;strokeWidth=2;rounded=1;align=center;verticalAlign=middle;fontSize=12;">
+      <mxGeometry as="geometry" x="160" y="665" width="460" height="40"/>
+    </mxCell>
+    <mxCell id="pool" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:13px;color:#6C3483;&quot;&gt;GlobalMeanPool&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#8E44AD;&quot;&gt;节点特征 → 图嵌入 ℝ⁶⁴ · 对batch中同一图节点取均值&lt;/font&gt;" style="shape=rect;fillColor=#E8DAEF;strokeColor=#8E44AD;strokeWidth=2;rounded=1;align=center;verticalAlign=middle;fontSize=12;spacingTop=5;">
+      <mxGeometry as="geometry" x="160" y="720" width="460" height="50"/>
+    </mxCell>
+    <mxCell id="dim3" parent="1" vertex="1" value="&lt;font style=&quot;font-size:9px;color:#8E44AD;&quot;&gt;&lt;b&gt;ℝ⁶⁴&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;">
+      <mxGeometry as="geometry" x="625" y="735" width="50" height="20"/>
+    </mxCell>
+    <mxCell id="fc" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:12px;color:#922B21;&quot;&gt;Linear (64 → 64)&lt;/font&gt;&lt;/b&gt;" style="shape=rect;fillColor=#FADBD8;strokeColor=#CB4335;strokeWidth=2;rounded=1;align=center;verticalAlign=middle;fontSize=12;">
+      <mxGeometry as="geometry" x="160" y="785" width="460" height="40"/>
+    </mxCell>
+    <mxCell id="dc_do" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:12px;color:#935116;&quot;&gt;Dropout (p=0.5)&lt;/font&gt;&lt;/b&gt;" style="shape=rect;fillColor=#FDEBD0;strokeColor=#D35400;strokeWidth=2;rounded=1;align=center;verticalAlign=middle;fontSize=12;">
+      <mxGeometry as="geometry" x="160" y="920" width="460" height="40"/>
+    </mxCell>
+    <mxCell id="clf" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:13px;color:#922B21;&quot;&gt;Linear (64 → 5)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#CB4335;&quot;&gt;→ Logits ∈ ℝ⁵ · 5级抑郁分类&lt;/font&gt;" style="shape=rect;fillColor=#FADBD8;strokeColor=#CB4335;strokeWidth=2;rounded=1;align=center;verticalAlign=middle;fontSize=12;spacingTop=5;">
+      <mxGeometry as="geometry" x="160" y="980" width="460" height="50"/>
+    </mxCell>
+    <mxCell id="dim4" parent="1" vertex="1" value="&lt;font style=&quot;font-size:9px;color:#CB4335;&quot;&gt;&lt;b&gt;ℝ⁵&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;">
+      <mxGeometry as="geometry" x="625" y="995" width="50" height="20"/>
+    </mxCell>
+    <mxCell id="output" parent="1" vertex="1" value="&lt;b&gt;&lt;font style=&quot;font-size:14px;color:#1E8449;&quot;&gt;📤 输出：PHQ-8 五级抑郁分类&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px;color:#555555;&quot;&gt;Logits ∈ ℝ&lt;sup&gt;B×5&lt;/sup&gt; → CrossEntropyLoss&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#7F8C8D;&quot;&gt;Level 0：无抑郁(0-4) | Level 1：轻度(5-9) | Level 2：中度(10-14) | Level 3：中重度(15-19) | Level 4：重度(20-24)&lt;/font&gt;" style="shape=rect;fillColor=#D5F5E3;strokeColor=#1E8449;strokeWidth=2;rounded=1;align=center;verticalAlign=middle;fontSize=12;spacingTop=6;shadow=1;">
+      <mxGeometry as="geometry" x="100" y="1105" width="560" height="75"/>
+    </mxCell>
+    <mxCell id="e_in" parent="1" style="endArrow=classic;endFill=1;strokeColor=#2C3E50;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="input" target="conv1" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="e_1" parent="1" style="endArrow=classic;endFill=1;strokeColor=#2C3E50;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="conv1" target="agg1" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="e_1b" parent="1" style="endArrow=classic;endFill=1;strokeColor=#2C3E50;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="agg1" target="bn1" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="e_2" parent="1" style="endArrow=classic;endFill=1;strokeColor=#2C3E50;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="bn1" target="do1" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="e_3" parent="1" style="endArrow=classic;endFill=1;strokeColor=#2C3E50;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="do1" target="conv2" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="e_4" parent="1" style="endArrow=classic;endFill=1;strokeColor=#2C3E50;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="conv2" target="agg2" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="e_4b" parent="1" style="endArrow=classic;endFill=1;strokeColor=#2C3E50;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="agg2" target="bn2" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="e_5" parent="1" style="endArrow=classic;endFill=1;strokeColor=#2C3E50;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="bn2" target="do2" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="e_6" parent="1" style="endArrow=classic;endFill=1;strokeColor=#2C3E50;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="do2" target="pool" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="e_7" parent="1" style="endArrow=classic;endFill=1;strokeColor=#2C3E50;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="pool" target="fc" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="e_8" parent="1" style="endArrow=classic;endFill=1;strokeColor=#2C3E50;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="fc" target="dc_do" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="e_9" parent="1" style="endArrow=classic;endFill=1;strokeColor=#2C3E50;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="dc_do" target="clf" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="e_out" parent="1" style="endArrow=classic;endFill=1;strokeColor=#6C3483;strokeWidth=2;rounded=1;edgeStyle=orthogonalEdgeStyle;" edge="1" source="clf" target="output" value="">
+      <mxGeometry as="geometry" relative="1"/>
+    </mxCell>
+    <mxCell id="leg_0" parent="1" vertex="1" value="&lt;font style=&quot;font-size:10px;&quot;&gt;采样聚合层 (SAGEConv)&lt;/font&gt;" style="shape=rect;fillColor=#ECF0F1;strokeColor=#8E44AD;strokeWidth=1.5;rounded=1;align=center;verticalAlign=middle;fontSize=10;">
+      <mxGeometry as="geometry" x="80" y="1200" width="600" height="28"/>
+    </mxCell>
+    <mxCell id="leg_1" parent="1" vertex="1" value="&lt;font style=&quot;font-size:10px;&quot;&gt;聚合过程 (Mean Aggregator)&lt;/font&gt;" style="shape=rect;fillColor=#F5EEF8;strokeColor=#AF7AC5;strokeWidth=1.5;rounded=1;align=center;verticalAlign=middle;fontSize=10;">
+      <mxGeometry as="geometry" x="80" y="1233" width="600" height="28"/>
+    </mxCell>
+    <mxCell id="leg_2" parent="1" vertex="1" value="&lt;font style=&quot;font-size:10px;&quot;&gt;归一化+激活 (BN → ReLU)&lt;/font&gt;" style="shape=rect;fillColor=#D6EAF8;strokeColor=#2E86C1;strokeWidth=1.5;rounded=1;align=center;verticalAlign=middle;fontSize=10;">
+      <mxGeometry as="geometry" x="80" y="1266" width="600" height="28"/>
+    </mxCell>
+    <mxCell id="leg_3" parent="1" vertex="1" value="&lt;font style=&quot;font-size:10px;&quot;&gt;Dropout (p=0.5)&lt;/font&gt;" style="shape=rect;fillColor=#FDEBD0;strokeColor=#D35400;strokeWidth=1.5;rounded=1;align=center;verticalAlign=middle;fontSize=10;">
+      <mxGeometry as="geometry" x="80" y="1299" width="600" height="28"/>
+    </mxCell>
+    <mxCell id="leg_4" parent="1" vertex="1" value="&lt;font style=&quot;font-size:10px;&quot;&gt;图池化 (GlobalMeanPool)&lt;/font&gt;" style="shape=rect;fillColor=#E8DAEF;strokeColor=#8E44AD;strokeWidth=1.5;rounded=1;align=center;verticalAlign=middle;fontSize=10;">
+      <mxGeometry as="geometry" x="80" y="1332" width="600" height="28"/>
+    </mxCell>
+    <mxCell id="leg_5" parent="1" vertex="1" value="&lt;font style=&quot;font-size:10px;&quot;&gt;全连接层 (Linear)&lt;/font&gt;" style="shape=rect;fillColor=#FADBD8;strokeColor=#CB4335;strokeWidth=1.5;rounded=1;align=center;verticalAlign=middle;fontSize=10;">
+      <mxGeometry as="geometry" x="80" y="1365" width="600" height="28"/>
+    </mxCell>
+    <mxCell id="note" parent="1" vertex="1" value="&lt;font style=&quot;font-size:10px;color:#5D6D7E;&quot;&gt;SAGEConv：采用采样+聚合策略，将邻居特征与自身特征拼接后做线性变换，适合大规模图和归纳学习场景&lt;br&gt;公式：h_N(v) = mean({h_u, ∀u∈N(v)}) · h_v' = W · CONCAT(h_v, h_N(v))&lt;/font&gt;" style="shape=rect;fillColor=#FFFFFF;strokeColor=#BDC3C7;strokeWidth=1;rounded=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;fontSize=10;">
+      <mxGeometry as="geometry" x="80" y="1400" width="600" height="45"/>
+    </mxCell>
+  </root>
+</mxGraphModel>

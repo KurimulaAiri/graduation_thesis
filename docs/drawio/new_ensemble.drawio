@@ -1,0 +1,192 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.4 Chrome/138.0.7204.97 Electron/37.2.1 Safari/537.36" version="28.0.4">
+  <diagram id="kWZzKlEtW6gC9TpzAZiG" name="第 1 页">
+    <mxGraphModel dx="462451" dy="348321" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="HJkQSp_u-PD6tHdSrd_k-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="title" target="input">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="&lt;b&gt;&lt;font style=&quot;font-size: 20px&quot;&gt;多图神经网络抑郁症分类集成系统 (Ensemble System)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;Graph Neural Network Ensemble · 软投票融合机制 · 基于 PHQ-8 量表评测" style="text;html=1;strokeColor=#1E293B;fillColor=#0F172A;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontColor=#FFFFFF;arcSize=12;" parent="1" vertex="1">
+          <mxGeometry x="-205130" y="-21970" width="1540" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="input" value="&lt;b&gt;📥 全局输入特征 (Input Graph Data)&lt;/b&gt;&lt;br&gt;特征矩阵 x ∈ ℝⁿˣᵈ  |  邻接表 edge_index ∈ ℤ²ˣᴱ  |  批次索引 batch ∈ ℕⁿ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#F59E0B;strokeWidth=2;fontColor=#B45309;arcSize=10;" parent="1" vertex="1">
+          <mxGeometry x="-204960" y="-21880" width="1200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="container" value="&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;b&gt;EnsembleClassifier (ModuleList)&lt;/b&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;font color=&quot;#64748b&quot;&gt;包含三大主流图神经网络变体作为基分类器，并行提取多维度拓扑特征&lt;/font&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#CBD5E1;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=20;spacingTop=10;" parent="1" vertex="1">
+          <mxGeometry x="-205130" y="-21800" width="1540" height="675" as="geometry" />
+        </mxCell>
+        <mxCell id="HJkQSp_u-PD6tHdSrd_k-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;curved=0;" edge="1" parent="1" source="gcn_box" target="voting">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gcn_box" value="&lt;b&gt;分支一：GCN-based Submodel&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px&quot;&gt;模型类型: model_type = &#39;gcn&#39;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2ECC71;strokeWidth=2;align=center;verticalAlign=top;spacingTop=8;" parent="1" vertex="1">
+          <mxGeometry x="-205095" y="-21750" width="460" height="605" as="geometry" />
+        </mxCell>
+        <mxCell id="gcn_c1" value="&lt;b&gt;GCNConv (第一层图卷积)&lt;/b&gt;&lt;br&gt;维度变换: d_in → 64  |  特征传播: 均匀邻居聚合" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F8F5;strokeColor=#27AE60;" parent="1" vertex="1">
+          <mxGeometry x="-205075" y="-21665" width="420" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="gcn_b1" value="&lt;b&gt;BatchNorm1d → ReLU 激活&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontColor=#0369A1;" parent="1" vertex="1">
+          <mxGeometry x="-205075" y="-21610" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gcn_d1" value="&lt;b&gt;Dropout (p = 0.5)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;fontColor=#C2410C;" parent="1" vertex="1">
+          <mxGeometry x="-205075" y="-21565" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gcn_c2" value="&lt;b&gt;GCNConv (第二层图卷积)&lt;/b&gt;&lt;br&gt;维度保持: 64 → 64  |  聚合公式: h_v^(l) = σ(∑ W h_u / c_uv)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F8F5;strokeColor=#27AE60;" parent="1" vertex="1">
+          <mxGeometry x="-205075" y="-21520" width="420" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="gcn_b2" value="&lt;b&gt;BatchNorm1d → ReLU 激活&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontColor=#0369A1;" parent="1" vertex="1">
+          <mxGeometry x="-205075" y="-21465" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gcn_d2" value="&lt;b&gt;Dropout (p = 0.5)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;fontColor=#C2410C;" parent="1" vertex="1">
+          <mxGeometry x="-205075" y="-21420" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gcn_p1" value="&lt;b&gt;GlobalMeanPool (图级读出 Readout)&lt;/b&gt;&lt;br&gt;节点状态平均 → 转换为图全局向量 ∈ ℝ⁶⁴" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#9333EA;fontColor=#6B21A8;" parent="1" vertex="1">
+          <mxGeometry x="-205075" y="-21375" width="420" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="gcn_l1" value="&lt;b&gt;Linear (密底层: 64 → 64)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#E11D48;fontColor=#9F1239;" parent="1" vertex="1">
+          <mxGeometry x="-205075" y="-21315" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gcn_d3" value="&lt;b&gt;Dropout (p = 0.5)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;fontColor=#C2410C;" parent="1" vertex="1">
+          <mxGeometry x="-205075" y="-21265" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gcn_out" value="&lt;b&gt;Linear 输出层 (64 → 5)&lt;/b&gt;&lt;br&gt;GCN 独立预测几率: Logits_gcn ∈ ℝ⁵" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#E11D48;fontColor=#9F1239;" parent="1" vertex="1">
+          <mxGeometry x="-205075" y="-21220" width="420" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="gat_box" value="&lt;b&gt;分支二：GAT-based Submodel&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px&quot;&gt;模型类型: model_type = &#39;gat&#39;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E67E22;strokeWidth=2;align=center;verticalAlign=top;spacingTop=8;" parent="1" vertex="1">
+          <mxGeometry x="-204590" y="-21750" width="460" height="605" as="geometry" />
+        </mxCell>
+        <mxCell id="gat_c1" value="&lt;b&gt;GATConv (第一层注意力图卷积)&lt;/b&gt;&lt;br&gt;配置: d_in → 64  |  多头机制: heads = 4, concat = False" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF9E7;strokeColor=#D35400;" parent="1" vertex="1">
+          <mxGeometry x="-204570" y="-21665" width="420" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="gat_b1" value="&lt;b&gt;BatchNorm1d → ReLU 激活&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontColor=#0369A1;" parent="1" vertex="1">
+          <mxGeometry x="-204570" y="-21610" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gat_d1" value="&lt;b&gt;Dropout (p = 0.5)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;fontColor=#C2410C;" parent="1" vertex="1">
+          <mxGeometry x="-204570" y="-21565" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gat_c2" value="&lt;b&gt;GATConv (第二层注意力图卷积)&lt;/b&gt;&lt;br&gt;α_ij = softmax(LeakyReLU(aᵀ [Wh_i || Wh_j]))" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF9E7;strokeColor=#D35400;" parent="1" vertex="1">
+          <mxGeometry x="-204570" y="-21520" width="420" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="gat_b2" value="&lt;b&gt;BatchNorm1d → ReLU 激活&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontColor=#0369A1;" parent="1" vertex="1">
+          <mxGeometry x="-204570" y="-21465" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gat_d2" value="&lt;b&gt;Dropout (p = 0.5)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;fontColor=#C2410C;" parent="1" vertex="1">
+          <mxGeometry x="-204570" y="-21420" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gat_p1" value="&lt;b&gt;GlobalMeanPool (图级读出 Readout)&lt;/b&gt;&lt;br&gt;动态注意力加权平均特征压缩 ∈ ℝ⁶⁴" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#9333EA;fontColor=#6B21A8;" parent="1" vertex="1">
+          <mxGeometry x="-204570" y="-21375" width="420" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="gat_l1" value="&lt;b&gt;Linear (密底层: 64 → 64)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#E11D48;fontColor=#9F1239;" parent="1" vertex="1">
+          <mxGeometry x="-204570" y="-21315" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gat_d3" value="&lt;b&gt;Dropout (p = 0.5)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;fontColor=#C2410C;" parent="1" vertex="1">
+          <mxGeometry x="-204570" y="-21265" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gat_out" value="&lt;b&gt;Linear 输出层 (64 → 5)&lt;/b&gt;&lt;br&gt;GAT 独立预测几率: Logits_gat ∈ ℝ⁵" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#E11D48;fontColor=#9F1239;" parent="1" vertex="1">
+          <mxGeometry x="-204570" y="-21220" width="420" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="sage_box" value="&lt;b&gt;分支三：GraphSAGE-based Submodel&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px&quot;&gt;模型类型: model_type = &#39;sage&#39;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8E44AD;strokeWidth=2;align=center;verticalAlign=top;spacingTop=8;" parent="1" vertex="1">
+          <mxGeometry x="-204085" y="-21750" width="460" height="605" as="geometry" />
+        </mxCell>
+        <mxCell id="sage_c1" value="&lt;b&gt;SAGEConv (第一层采样聚合卷积)&lt;/b&gt;&lt;br&gt;配置: d_in → 64  |  聚合算子: Mean Aggregator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5EEF8;strokeColor=#6C3483;" parent="1" vertex="1">
+          <mxGeometry x="-204065" y="-21665" width="420" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="sage_b1" value="&lt;b&gt;BatchNorm1d → ReLU 激活&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontColor=#0369A1;" parent="1" vertex="1">
+          <mxGeometry x="-204065" y="-21610" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="sage_d1" value="&lt;b&gt;Dropout (p = 0.5)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;fontColor=#C2410C;" parent="1" vertex="1">
+          <mxGeometry x="-204065" y="-21565" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="sage_c2" value="&lt;b&gt;SAGEConv (第二层采样聚合卷积)&lt;/b&gt;&lt;br&gt;公式: h_N(v) = mean({h_u, ∀u ∈ N(v)})" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5EEF8;strokeColor=#6C3483;" parent="1" vertex="1">
+          <mxGeometry x="-204065" y="-21520" width="420" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="sage_b2" value="&lt;b&gt;BatchNorm1d → ReLU 激活&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontColor=#0369A1;" parent="1" vertex="1">
+          <mxGeometry x="-204065" y="-21465" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="sage_d2" value="&lt;b&gt;Dropout (p = 0.5)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;fontColor=#C2410C;" parent="1" vertex="1">
+          <mxGeometry x="-204065" y="-21420" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="sage_p1" value="&lt;b&gt;GlobalMeanPool (图级读出 Readout)&lt;/b&gt;&lt;br&gt;领域采样特征全局泛化融合 ∈ ℝ⁶⁴" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#9333EA;fontColor=#6B21A8;" parent="1" vertex="1">
+          <mxGeometry x="-204065" y="-21375" width="420" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="sage_l1" value="&lt;b&gt;Linear (密底层: 64 → 64)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#E11D48;fontColor=#9F1239;" parent="1" vertex="1">
+          <mxGeometry x="-204065" y="-21315" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="sage_d3" value="&lt;b&gt;Dropout (p = 0.5)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;fontColor=#C2410C;" parent="1" vertex="1">
+          <mxGeometry x="-204065" y="-21265" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="sage_out" value="&lt;b&gt;Linear 输出层 (64 → 5)&lt;/b&gt;&lt;br&gt;GraphSAGE 独立预测几率: Logits_sage ∈ ℝ⁵" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#E11D48;fontColor=#9F1239;" parent="1" vertex="1">
+          <mxGeometry x="-204065" y="-21220" width="420" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="voting" value="&lt;b&gt;软投票决策融合器 (Soft Voting Mechanism)&lt;/b&gt;&lt;br&gt;Final_Logits = mean(torch.stack([Logits_gcn, Logits_gat, Logits_sage]), dim=0) → Final Logits ∈ ℝᴮˣ⁵" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF9E7;strokeColor=#D4AC0D;strokeWidth=2;fontColor=#7D6608;" parent="1" vertex="1">
+          <mxGeometry x="-204760" y="-21100" width="800" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="final_out" value="&lt;b&gt;最终系统预测输出：PHQ-8 抑郁严重程度五级分类&lt;/b&gt;&lt;br&gt;量表映射：Level 0: 无抑郁 (0-4) | Level 1: 轻度 (5-9) | Level 2: 中度 (10-14) | Level 3: 中重度 (15-19) | Level 4: 重度 (20-24)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F8F5;strokeColor=#2ECC71;strokeWidth=2;fontColor=#1E8449;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="-205035" y="-21010" width="1300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_in1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748B;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="input" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-204845" y="-21750" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-204360" y="-21820" />
+              <mxPoint x="-204845" y="-21820" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_in2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748B;strokeWidth=2;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="input" target="gat_box" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_in3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748B;strokeWidth=2;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="input" target="sage_box" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-204360" y="-21820" />
+              <mxPoint x="-203855" y="-21820" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_g1" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gcn_c1" target="gcn_b1" edge="1" />
+        <mxCell id="e_g2" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gcn_b1" target="gcn_d1" edge="1" />
+        <mxCell id="e_g3" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gcn_d1" target="gcn_c2" edge="1" />
+        <mxCell id="e_g4" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gcn_c2" target="gcn_b2" edge="1" />
+        <mxCell id="e_g5" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gcn_b2" target="gcn_d2" edge="1" />
+        <mxCell id="e_g6" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gcn_d2" target="gcn_p1" edge="1" />
+        <mxCell id="e_g7" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gcn_p1" target="gcn_l1" edge="1" />
+        <mxCell id="e_g8" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gcn_l1" target="gcn_d3" edge="1" />
+        <mxCell id="e_g9" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gcn_d3" target="gcn_out" edge="1" />
+        <mxCell id="e_at1" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gat_c1" target="gat_b1" edge="1" />
+        <mxCell id="e_at2" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gat_b1" target="gat_d1" edge="1" />
+        <mxCell id="e_at3" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gat_d1" target="gat_c2" edge="1" />
+        <mxCell id="e_at4" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gat_c2" target="gat_b2" edge="1" />
+        <mxCell id="e_at5" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gat_b2" target="gat_d2" edge="1" />
+        <mxCell id="e_at6" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gat_d2" target="gat_p1" edge="1" />
+        <mxCell id="e_at7" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gat_p1" target="gat_l1" edge="1" />
+        <mxCell id="e_at8" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gat_l1" target="gat_d3" edge="1" />
+        <mxCell id="e_at9" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="gat_d3" target="gat_out" edge="1" />
+        <mxCell id="e_sg1" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="sage_c1" target="sage_b1" edge="1" />
+        <mxCell id="e_sg2" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="sage_b1" target="sage_d1" edge="1" />
+        <mxCell id="e_sg3" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="sage_d1" target="sage_c2" edge="1" />
+        <mxCell id="e_sg4" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="sage_c2" target="sage_b2" edge="1" />
+        <mxCell id="e_sg5" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="sage_b2" target="sage_d2" edge="1" />
+        <mxCell id="e_sg6" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="sage_d2" target="sage_p1" edge="1" />
+        <mxCell id="e_sg7" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="sage_p1" target="sage_l1" edge="1" />
+        <mxCell id="e_sg8" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="sage_l1" target="sage_d3" edge="1" />
+        <mxCell id="e_sg9" style="strokeColor=#64748B;strokeWidth=1.5;" parent="1" source="sage_d3" target="sage_out" edge="1" />
+        <mxCell id="e_v1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#E74C3C;strokeWidth=2;dashed=1;" parent="1" source="gcn_out" target="voting" edge="1" />
+        <mxCell id="e_v2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#E74C3C;strokeWidth=2;dashed=1;" parent="1" source="gat_out" target="voting" edge="1" />
+        <mxCell id="e_v3" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#E74C3C;strokeWidth=2;dashed=1;" parent="1" source="sage_out" target="voting" edge="1" />
+        <mxCell id="e_final" style="strokeColor=#2ECC71;strokeWidth=2.5;" parent="1" source="voting" target="final_out" edge="1" />
+        <mxCell id="HJkQSp_u-PD6tHdSrd_k-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="gat_box" target="voting">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HJkQSp_u-PD6tHdSrd_k-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;curved=0;" edge="1" parent="1" source="sage_box" target="voting">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HJkQSp_u-PD6tHdSrd_k-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.519;entryY=-0.018;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="voting" target="final_out">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
